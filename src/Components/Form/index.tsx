@@ -1,4 +1,87 @@
 import { useState } from "react"
-import { Tarefa } from "../../types/tarefas";
+import { Lembrete } from "../../types/lembretes";
+import Button from "../Button";
+import styled from "styled-components";
 
+const NovoLembrete= styled.form`
+    display:flex;
+    flex-direction: column;
+    grid-area: nova-tarefa;
+    background-image: linear-gradient(90deg, #002F52 35%, #326589 );
+    border-radius: 10px;
+    box-shadow: 2px 4px 4px #0000009F;
+    padding: 12px;
+
+`
+
+const InputContainer=styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 16px;
+
+`
+
+interface FormProps {
+  setLembretes: React.Dispatch<React.SetStateAction<Lembrete[]>>;
+}
+
+function Form ({setLembretes}: FormProps) {
+
+    const[lembrete, setLembrete]= useState('')
+    const[data, setData] = useState('dd/mm/aaaa')
+
+    function adicionarLembrete(event: React.FormEvent<HTMLFormElement>){
+      event.preventDefault();
+      const novoLembrete: Lembrete={
+        lembrete,
+        data,
+      };
+      setLembretes(lembretesAntigos=>[...lembretesAntigos, novoLembrete])
+      setLembrete('')
+      setData('dd/mm/aaaa')
+      
+    }
+
+    return (
+        
+        <NovoLembrete onSubmit={adicionarLembrete}>
+          <InputContainer>
+            
+            <label htmlFor="lembrete">
+              Nome
+            </label>
+            <input
+              type="text"
+              name="lembrete"
+              id="lembrete"
+              value={lembrete}
+              onChange={evento=>{setLembrete(evento.target.value)}}
+              placeholder="Nome do Lembrete"
+              required
+            />
+          </InputContainer>
+          <InputContainer>
+            <label htmlFor="data">
+              Data
+            </label>
+            <input
+              type="date"
+              step="1"
+              name="data"
+              value= {data}
+              onChange={evento => {setData(evento.target.value)}}
+              id="data"
+              required
+            />
+          </InputContainer>
+          <Button 
+            texto= 'Criar'
+            type='submit'
+
+          />
+        </NovoLembrete>
+      )
+}
+export default Form
 
