@@ -1,18 +1,23 @@
 import { Lembrete } from "../../types/lembretes"
 import Item from "./Item"
+import styled from "styled-components"
+
+const Titulo= styled.h1`
+    font-size:32px
+`
 
 function Lista({lembretes}:{lembretes: Lembrete[]}){
     
     return (
-        <aside className='listaTarefas'>
-          <h2> Lista de Lembretes </h2>
+        <aside>
+          <Titulo> Lista de Lembretes </Titulo>
 
           <ul>
             {lembretes.map((item, index) => (
               <Item 
                 key={index}
-                lembrete={item.lembrete}
                 data={item.data}
+                lembrete={item.lembrete}
               /> 
             ))}
           </ul>
