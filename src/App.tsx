@@ -2,15 +2,12 @@ import Form from './Components/Form';
 import { useState } from 'react';
 import { Lembrete } from './types/lembretes';
 import styled from 'styled-components';
+import Item from './Components/List/Item';
+import Lista from './Components/List';
 
 const AppStyled= styled.div`
-    display: grid;
-    grid-template-rows: min-content min-content auto;
-    grid-template-areas: 
-    "nova-tarefa"
-    "cronometro"
-    "tarefas"
-    ;
+    display: flex;
+    flex-direction: column;
     row-gap: 24px;
     min-width: 320px;
     min-height: calc(100vh - 32px);
@@ -23,11 +20,17 @@ const AppStyled= styled.div`
     
 `
 
+const Titulo = styled.h1`
+    font-size:32px
+`
+
 function App() {
   const [lembrete, setLembretes] =useState<Lembrete[]| []>([])
   return (
     <AppStyled>
+      <Titulo>Novo Lembrete</Titulo>
       <Form setLembretes= {setLembretes}/>
+      <Lista lembretes={lembrete}/>
     </AppStyled>
   );
 }
