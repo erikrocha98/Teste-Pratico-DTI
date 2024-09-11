@@ -22,6 +22,27 @@ const InputContainer=styled.div`
 
 `
 
+const LabelEstilizado=styled.label`
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+
+`
+const Input= styled.input`
+    width: 100%;
+    padding: 8px 12px 4px;
+    box-sizing: border-box;
+    border: unset;
+    border-radius: 5px;
+    background-color: #5D677C;
+    box-shadow: 0px 2px 4px #2D2B2B9F inset;
+
+    ::placeholder {
+      color: #BFBFBF;
+    }
+
+
+`
+
 interface FormProps {
   setLembretes: React.Dispatch<React.SetStateAction<Lembrete[]>>;
 }
@@ -48,10 +69,10 @@ function Form ({setLembretes}: FormProps) {
         <NovoLembrete onSubmit={adicionarLembrete}>
           <InputContainer>
             
-            <label htmlFor="lembrete">
+            <LabelEstilizado htmlFor="lembrete">
               Nome
-            </label>
-            <input
+            </LabelEstilizado>
+            <Input
               type="text"
               name="lembrete"
               id="lembrete"
@@ -62,10 +83,10 @@ function Form ({setLembretes}: FormProps) {
             />
           </InputContainer>
           <InputContainer>
-            <label htmlFor="data">
+            <LabelEstilizado htmlFor="data">
               Data
-            </label>
-            <input
+            </LabelEstilizado>
+            <Input
               type="date"
               step="1"
               name="data"
