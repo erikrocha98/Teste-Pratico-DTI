@@ -11,7 +11,7 @@ const Botao = styled.button`
     padding: 16px;
     width: 150px;
     
-    ::active {
+    &:active {
       background-color: #7CA6B7;
       box-shadow: 2px 2px 4px #0000009F inset;
     }

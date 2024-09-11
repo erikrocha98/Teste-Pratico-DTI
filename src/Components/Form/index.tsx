@@ -36,7 +36,7 @@ const Input= styled.input`
     background-color: #5D677C;
     box-shadow: 0px 2px 4px #2D2B2B9F inset;
 
-    ::placeholder {
+    &::placeholder {
       color: #BFBFBF;
     }
 
