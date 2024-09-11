@@ -3,16 +3,29 @@ import Item from "./Item"
 import styled from "styled-components"
 
 const Titulo= styled.h1`
-    font-size:32px
+    font-size:32px;
+    margin-bottom: 12px;
+`
+
+const ListaTarefas=styled.aside`
+    grid-area: tarefas;
+    height: 100%;
+
+`
+const ListaContainer=styled.ul`
+      max-height: 350px;
+      overflow-y: scroll;
+      scrollbar-width: thin;
+
 `
 
 function Lista({lembretes}:{lembretes: Lembrete[]}){
     
     return (
-        <aside>
+        <ListaTarefas>
           <Titulo> Lista de Lembretes </Titulo>
 
-          <ul>
+          <ListaContainer>
             {lembretes.map((item, index) => (
               <Item 
                 key={index}
@@ -20,8 +33,8 @@ function Lista({lembretes}:{lembretes: Lembrete[]}){
                 lembrete={item.lembrete}
               /> 
             ))}
-          </ul>
-        </aside>
+          </ListaContainer>
+        </ListaTarefas>
       )
 }
 
