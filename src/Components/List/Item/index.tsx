@@ -8,20 +8,17 @@ const ItemLista= styled.li`
     margin-bottom: 8px;
     position: relative;
     cursor: pointer;
+    width: 600px;
 
-`
-const ItemData = styled.span`
-    color: #D0D0D0;
 `
 const ItemLembrete=styled.h3`
     margin-bottom: 8px;
     word-break: break-all;
 
 `
-export default function Item (props: {lembrete: string, data: string}){
+export default function Item (props: {lembrete: string}){
     return(
         <ItemLista>
-            <ItemData>{props.data}</ItemData>
             <ItemLembrete>{props.lembrete}</ItemLembrete>
         </ItemLista>
     )

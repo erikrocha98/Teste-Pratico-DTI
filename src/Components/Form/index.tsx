@@ -64,6 +64,12 @@ function Form ({setLembretes}: FormProps) {
       
     }
 
+    const formatarData = (data: string): string => {
+      const [ano, mes, dia] = data.split('-');
+      return `${dia}/${mes}/${ano}`;
+    };
+    
+
     return (
         
         <NovoLembrete onSubmit={adicionarLembrete}>
@@ -91,7 +97,7 @@ function Form ({setLembretes}: FormProps) {
               step="1"
               name="data"
               value= {data}
-              onChange={evento => {setData(evento.target.value)}}
+              onChange={evento=> setData(evento.target.value)} 
               id="data"
               required
             />
