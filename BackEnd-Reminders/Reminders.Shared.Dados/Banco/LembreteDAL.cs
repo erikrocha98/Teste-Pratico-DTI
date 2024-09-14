@@ -35,6 +35,11 @@ namespace BackEnd_Reminders.Banco
             context.Remove(lembrete);
             context.SaveChanges();
         }
-        
+        public Lembretes? RecuperarPor(Func<Lembretes, bool> condicao)
+        {
+            using var context = new RemindersContext();
+            return context.Lembretes.FirstOrDefault(condicao);
+        }
+
     }
 }

@@ -9,3 +9,15 @@ C:\Users\erikr\OneDrive\Desktop\BackEnd-Reminders\Reminders.Shared.Modelos\obj\D
 C:\Users\erikr\OneDrive\Desktop\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\refint\Reminders.Shared.Modelos.dll
 C:\Users\erikr\OneDrive\Desktop\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\Reminders.Shared.Modelos.pdb
 C:\Users\erikr\OneDrive\Desktop\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\ref\Reminders.Shared.Modelos.dll
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\bin\Debug\net8.0\Reminders.Shared.Modelos.deps.json
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\bin\Debug\net8.0\Reminders.Shared.Modelos.dll
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\bin\Debug\net8.0\Reminders.Shared.Modelos.pdb
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\Reminders.Shared.Modelos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\Reminders.Shared.Modelos.AssemblyInfoInputs.cache
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\Reminders.Shared.Modelos.AssemblyInfo.cs
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\Reminders.Shared.Modelos.csproj.CoreCompileInputs.cache
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\Reminders.Shared.Modelos.sourcelink.json
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\Reminders.Shared.Modelos.dll
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\refint\Reminders.Shared.Modelos.dll
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\Reminders.Shared.Modelos.pdb
+C:\Users\erikr\OneDrive\Desktop\Teste Prático DTI\gerenciador-lembretes\BackEnd-Reminders\Reminders.Shared.Modelos\obj\Debug\net8.0\ref\Reminders.Shared.Modelos.dll
