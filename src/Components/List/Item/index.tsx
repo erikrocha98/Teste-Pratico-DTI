@@ -8,7 +8,7 @@ const ItemLista= styled.li`
     margin-bottom: 8px;
     position: relative;
     cursor: pointer;
-    width: 600px;
+    width: 44vw;
 
 `
 const ItemLembrete=styled.h3`

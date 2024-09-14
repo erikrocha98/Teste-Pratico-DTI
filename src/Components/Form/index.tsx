@@ -11,6 +11,7 @@ const NovoLembrete= styled.form`
     border-radius: 10px;
     box-shadow: 2px 4px 4px #0000009F;
     padding: 12px;
+    width: 50%;
 
 `
 
@@ -64,17 +65,11 @@ function Form ({setLembretes}: FormProps) {
       
     }
 
-    const formatarData = (data: string): string => {
-      const [ano, mes, dia] = data.split('-');
-      return `${dia}/${mes}/${ano}`;
-    };
     
-
     return (
         
         <NovoLembrete onSubmit={adicionarLembrete}>
           <InputContainer>
-            
             <LabelEstilizado htmlFor="lembrete">
               Nome
             </LabelEstilizado>

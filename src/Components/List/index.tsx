@@ -4,7 +4,7 @@ import Item from "./Item"
 import styled from "styled-components"
 
 const Titulo= styled.h1`
-    font-size:32px;
+    font-size:24px;
     margin-bottom: 12px;
 `
 
@@ -15,9 +15,6 @@ const ListaTarefas=styled.aside`
 `
 const ListaContainer=styled.ul`
       max-height: 350px;
-      overflow-y: scroll;
-      scrollbar-width: thin;
-
 `
 const ItemData = styled.h3`
     color: #D0D0D0;

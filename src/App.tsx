@@ -2,12 +2,12 @@ import Form from './Components/Form';
 import { useState } from 'react';
 import { Lembrete } from './types/lembretes';
 import styled from 'styled-components';
-import Item from './Components/List/Item';
 import Lista from './Components/List';
 
 const AppStyled= styled.div`
     display: flex;
     flex-direction: column;
+    align-items:center;
     row-gap: 24px;
     min-width: 320px;
     min-height: calc(100vh - 32px);
@@ -21,7 +21,8 @@ const AppStyled= styled.div`
 `
 
 const Titulo = styled.h1`
-    font-size:32px
+    font-size:32px;
+    font-weight:bold;
 `
 
 function App() {
