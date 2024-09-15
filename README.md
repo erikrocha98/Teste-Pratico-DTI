@@ -1,17 +1,20 @@
-# Gerenciador de Lembretes: Um teste prático para o processo seletivo DTI Digital
+# Gerenciador de Lembretes
 
-> O gerenciador de lembretes é um projeto simples que idealmente permitiria a adição e deleção de lembretes feitas por um usuário. 
-
-
-## 💻 Premissas assumidas e Pré-requisitos
+Este projeto foi desenvolvido como parte de um teste prático para o processo seletivo da DTI Digital. O objetivo é criar um Gerenciador de Lembretes que permite a criação e exclusão de lembretes por um usuário. Este projeto fullstack utiliza tecnologias como React, C#, ASP.NET Core e SQL Server.
 
 
+## 💻 Premissas assumidas, Decisão de projeto e Pré-requisitos
+
+Este projeto foi desenvolvido com base nos seguintes pressupostos e decisões:
+
+- Trata-se de um projeto fullstack que envolve o uso de **React** para o frontend, **C#** e **ASP.NET Core** para o backend, e **SQL Server** como banco de dados relacional.
+- O **SQL Server** foi escolhido em detrimento do MySQL(SGBD relacional mais popular) devido à sua integração nativa com o .NET e seu desempenho otimizado para este tipo de aplicação.
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 - Você instalou a versão mais recente e estável do `<nodeJs>`.
 - Você instalou a versão mais recente e estável do `<.NET SDK>`. 
-- Você instalou a versão mais recente e estável do `<SQL server>`.
+- Você instalou a versão mais recente e estável do `<SQL Server>`.
 - Você instalou a versão mais recente e estável do `<Postman>`.
 - Você leu `<documentação_relacionada_ao_projeto>`.
 
@@ -23,10 +26,34 @@ Para instalar as <dependências> do frontend, digite o comando
 <npm install>
 ```
 
-## ☕ Usando <Gerenciador de Lembretes>
+## ☕ Usando o Gerenciador de Lembretes
 
-O presente projeto foi implementado com React e Typescript para o frontend e C# com ASP.NET CORE para o backend. Devido ao fato dos estudos em backend estarem em progresso, a aplicação com c# não está completa e portanto não há integração entre frontend e backend. As funcionalidades de criar lembretes e agrupar tais lembretes pela data foram feitas com estados locais no frontend. Portanto, Para usar o <Gerenciador de Lembretes>, siga a etapa:
+Este projeto utiliza **React e TypeScript** no frontend e **C# com ASP.NET Core** no backend. Devido ao estágio atual do desenvolvimento, o backend ainda não está completamente integrado. A seguir, explico como utilizar o frontend e testar o backend separadamente:
 
--Abra o terminal de comando no diretório 'src', código fonte da aplicação, e digite 'npm start'. A aplicação será compilada no seu navegador. 
 
-Para testar as rotas criadas para o <Backend do Gerenciador de Lembretes>, você pode compilar o arquivo principal Programm na pasta Api-Reminders e testar o funcionamento das rotas com o software Postman.
+### Frontend (Gerenciamento Local de Lembretes)
+
+As funcionalidades de criar e agrupar lembretes estão implementadas utilizando estados locais no frontend. Para iniciar o frontend:
+
+1. Abra o terminal no diretório `src` da aplicação.
+2. Execute o comando:
+
+```bash
+npm start
+
+### Backend (Rotas de API com ASP.NET Core)
+Embora a integração frontend-backend não esteja concluída, você pode testar as rotas do backend utilizando o Postman:
+
+1. Compile o projeto backend com o seguinte comando: 
+
+```bash
+dotnet run
+
+2. Para testar as rotas de lembretes, utilize o Postman para fazer requisições para http://localhost:{porta}/Lembretes, onde {porta} é a porta onde o backend está rodando.
+
+### ⚒️ Melhorias Futuras
+
+- Completar a integração entre o frontend e o backend.
+- Dar polimento à API aplicando boas práticas.
+- Implementar autenticação de usuário.
+- Adicionar testes automatizados para garantir a qualidade do código.
