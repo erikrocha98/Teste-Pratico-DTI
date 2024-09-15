@@ -18,9 +18,9 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 - Você instalou a versão mais recente e estável do `<Postman>`.
 - Você leu `<documentação_relacionada_ao_projeto>`.
 
-## 🚀 Instalando <dependências>
+## 🚀 Instalando dependências
 
-Para instalar as <dependências> do frontend, digite o comando
+Para instalar as dependências do frontend, abra o terminal no diretório gerenciador-lembretes e digite o comando
 
 ```
 <npm install>
@@ -37,17 +37,18 @@ As funcionalidades de criar e agrupar lembretes estão implementadas utilizando 
 
 1. Abra o terminal no diretório `src` da aplicação.
 2. Execute o comando:
-
-```bash
-npm start
+```
+<npm start>
+```
 
 ### Backend (Rotas de API com ASP.NET Core)
 Embora a integração frontend-backend não esteja concluída, você pode testar as rotas do backend utilizando o Postman:
 
 1. Compile o projeto backend com o seguinte comando: 
 
-```bash
+```
 dotnet run
+```
 
 2. Para testar as rotas de lembretes, utilize o Postman para fazer requisições para http://localhost:{porta}/Lembretes, onde {porta} é a porta onde o backend está rodando.
 
