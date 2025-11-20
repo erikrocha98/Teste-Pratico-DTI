@@ -22,17 +22,21 @@ const ItemData = styled.h3`
 
 function agruparPorData(lembretes: Lembrete[]): { [data: string]: Lembrete[] } {
   return lembretes.reduce((agrupado, lembrete) => {
-    const { data } = lembrete;
-
-    if (!agrupado[data]) {
-      agrupado[data] = [];
+    // Certifique-se de que `data` é um objeto Date
+    const dataFormatada = new Date(lembrete.data);
+    // Formatar a data para 'dd/mm/yyyy'
+    const dataString = `${dataFormatada.getDate().toString().padStart(2, '0')}/${(dataFormatada.getMonth() + 1).toString().padStart(2, '0')}/${dataFormatada.getFullYear()}`;
+    
+    if (!agrupado[dataString]) {
+      agrupado[dataString] = [];
     }
 
-    agrupado[data].push(lembrete);
+    agrupado[dataString].push(lembrete);
 
     return agrupado;
   }, {} as { [data: string]: Lembrete[] });
 }
+
 
 function Lista({lembretes}:{lembretes: Lembrete[]}){
 

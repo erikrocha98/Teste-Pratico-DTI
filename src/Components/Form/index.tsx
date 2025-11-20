@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Lembrete } from "../../types/lembretes";
 import Button from "../Button";
 import styled from "styled-components";
+import axios from "axios";
 
 const NovoLembrete= styled.form`
     display:flex;
@@ -50,19 +51,41 @@ interface FormProps {
 
 function Form ({setLembretes}: FormProps) {
 
-    const[lembrete, setLembrete]= useState('')
-    const[data, setData] = useState('dd/mm/aaaa')
+    const[lembrete, setLembrete]= useState('');
+    const[data, setData] = useState<Date>(new Date());
 
-    function adicionarLembrete(event: React.FormEvent<HTMLFormElement>){
+    /* teste de conexão com a api */
+    useEffect(()=>{
+      axios.get("http://localhost:5121/Lembretes")
+        .then(resposta=>{
+          console.log(resposta.data);
+        })
+        .catch(erro=>{console.log(erro)});
+    })
+
+    async function adicionarLembrete(event: React.FormEvent<HTMLFormElement>){
       event.preventDefault();
       const novoLembrete: Lembrete={
         lembrete,
         data,
       };
-      setLembretes(lembretesAntigos=>[...lembretesAntigos, novoLembrete])
-      setLembrete('')
-      setData('dd/mm/aaaa')
-      
+      try {
+        const resposta = await axios.post("http://localhost:5121/Lembretes", novoLembrete);
+        console.log("Lembrete Criado: ", resposta.data);
+
+        setLembretes(lembretesAntigos=>[...lembretesAntigos, resposta.data]);
+        setLembrete('');
+        setData(new Date());
+        
+      } catch (error) {
+        console.error("Erro ao criar lembrete:", error);
+        alert("Não foi possível criar o lembrete");
+        
+      }
+    }
+    function handleDataChange(event: React.ChangeEvent<HTMLInputElement>) {
+      const novaData = new Date(event.target.value); // Convertendo o valor para objeto Date
+      setData(novaData);
     }
 
     
@@ -91,8 +114,8 @@ function Form ({setLembretes}: FormProps) {
               type="date"
               step="1"
               name="data"
-              value= {data}
-              onChange={evento=> setData(evento.target.value)} 
+              value={data.toISOString().split("T")[0]} // Converte a data para formato 'yyyy-mm-dd'
+              onChange={handleDataChange} 
               id="data"
               required
             />
