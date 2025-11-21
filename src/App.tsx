@@ -26,6 +26,19 @@ const Titulo = styled.h1`
     font-weight:bold;
 `
 
+const MensagemErro = styled.p`
+    color: #ff6b6b;
+    font-size: 14px;
+    padding: 12px;
+    background-color: rgba(255, 107, 107, 0.1);
+    border-radius: 8px;
+`;
+
+const MensagemCarregando = styled.p`
+    color: #51cf66;
+    font-size: 14px;
+`;
+
 function App() {
   const [lembretes, setLembretes] =useState<Lembrete[]>([]);
   const[carregando, setCarregando] = useState(true);

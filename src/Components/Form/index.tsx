@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Lembrete } from "../../types/lembretes";
 import Button from "../Button";
 import styled from "styled-components";
-import axios from "axios";
+import lembretesService from "../../services/lembreteService";
 
-const NovoLembrete= styled.form`
+const NovoLembrete = styled.form`
     display:flex;
     flex-direction: column;
     grid-area: nova-tarefa;
@@ -13,23 +13,21 @@ const NovoLembrete= styled.form`
     box-shadow: 2px 4px 4px #0000009F;
     padding: 12px;
     width: 50%;
-
 `
 
-const InputContainer=styled.div`
+const InputContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-bottom: 16px;
-
 `
 
-const LabelEstilizado=styled.label`
+const LabelEstilizado = styled.label`
     margin-bottom: 8px;
     font-size: 1.25rem;
-
 `
-const Input= styled.input`
+
+const Input = styled.input`
     width: 100%;
     padding: 8px 12px 4px;
     box-sizing: border-box;
@@ -41,92 +39,169 @@ const Input= styled.input`
     &::placeholder {
       color: #BFBFBF;
     }
+`
 
+const MensagemSucesso = styled.p`
+    color: #51cf66;
+    font-size: 14px;
+    margin-top: 8px;
+    text-align: center;
+`
 
+const MensagemErro = styled.p`
+    color: #ff6b6b;
+    font-size: 14px;
+    margin-top: 8px;
+    text-align: center;
 `
 
 interface FormProps {
   setLembretes: React.Dispatch<React.SetStateAction<Lembrete[]>>;
+  onNovoLembrete?: (lembrete: Lembrete) => void;
 }
 
-function Form ({setLembretes}: FormProps) {
+function Form({ setLembretes, onNovoLembrete }: FormProps) {
 
-    const[lembrete, setLembrete]= useState('');
-    const[data, setData] = useState<Date>(new Date());
+    const [name, setName] = useState('');
+    const [reminderDate, setReminderDate] = useState('');
+    const [enviando, setEnviando] = useState(false);
+    const [mensagem, setMensagem] = useState<{ tipo: 'sucesso' | 'erro', texto: string } | null>(null);
 
-    /* teste de conexão com a api */
-    useEffect(()=>{
-      axios.get("http://localhost:5121/Lembretes")
-        .then(resposta=>{
-          console.log(resposta.data);
-        })
-        .catch(erro=>{console.log(erro)});
-    })
-
-    async function adicionarLembrete(event: React.FormEvent<HTMLFormElement>){
+    async function adicionarLembrete(event: React.FormEvent<HTMLFormElement>) {
       event.preventDefault();
-      const novoLembrete: Lembrete={
-        lembrete,
-        data,
-      };
-      try {
-        const resposta = await axios.post("http://localhost:5121/Lembretes", novoLembrete);
-        console.log("Lembrete Criado: ", resposta.data);
+      
+      // Limpa mensagens anteriores
+      setMensagem(null);
+      setEnviando(true);
 
-        setLembretes(lembretesAntigos=>[...lembretesAntigos, resposta.data]);
-        setLembrete('');
-        setData(new Date());
+      try {
+        // Converte a data para o formato ISO que a API espera
+        const dataFormatada = new Date(reminderDate).toISOString();
         
-      } catch (error) {
+        // Cria o objeto no formato correto da API
+        const novoLembrete = {
+          name: name,
+          reminderDate: dataFormatada
+        };
+
+        // Envia para a API usando o service
+        const lembreteCreated = await lembretesService.criarLembrete(novoLembrete);
+        
+        console.log("Lembrete criado com sucesso:", lembreteCreated);
+
+        // Atualiza a lista de lembretes
+        setLembretes(lembretesAntigos => [...lembretesAntigos, lembreteCreated]);
+        
+        // Chama callback se existir
+        if (onNovoLembrete) {
+          onNovoLembrete(lembreteCreated);
+        }
+
+        // Limpa o formulário
+        setName('');
+        setReminderDate('');
+        
+        // Mostra mensagem de sucesso
+        setMensagem({ tipo: 'sucesso', texto: 'Lembrete criado com sucesso! ✓' });
+        
+        // Remove a mensagem após 3 segundos
+        setTimeout(() => setMensagem(null), 3000);
+
+      } catch (error: any) {
         console.error("Erro ao criar lembrete:", error);
-        alert("Não foi possível criar o lembrete");
         
+        // Mostra mensagem de erro mais específica
+        const mensagemErro = error.response?.data?.message || 
+                            error.message || 
+                            "Não foi possível criar o lembrete. Verifique se a API está rodando.";
+        
+        setMensagem({ tipo: 'erro', texto: mensagemErro });
+      } finally {
+        setEnviando(false);
       }
     }
-    function handleDataChange(event: React.ChangeEvent<HTMLInputElement>) {
-      const novaData = new Date(event.target.value); // Convertendo o valor para objeto Date
-      setData(novaData);
-    }
 
-    
     return (
-        
         <NovoLembrete onSubmit={adicionarLembrete}>
           <InputContainer>
-            <LabelEstilizado htmlFor="lembrete">
+            <LabelEstilizado htmlFor="name">
               Nome
             </LabelEstilizado>
             <Input
               type="text"
-              name="lembrete"
-              id="lembrete"
-              value={lembrete}
-              onChange={evento=>{setLembrete(evento.target.value)}}
+              name="name"
+              id="name"
+              value={name}
+              onChange={evento => setName(evento.target.value)}
               placeholder="Nome do Lembrete"
               required
+              disabled={enviando}
             />
           </InputContainer>
+
           <InputContainer>
-            <LabelEstilizado htmlFor="data">
+            <LabelEstilizado htmlFor="reminderDate">
               Data
             </LabelEstilizado>
             <Input
               type="date"
-              step="1"
-              name="data"
-              value={data.toISOString().split("T")[0]} // Converte a data para formato 'yyyy-mm-dd'
-              onChange={handleDataChange} 
-              id="data"
+              name="reminderDate"
+              id="reminderDate"
+              value={reminderDate}
+              onChange={evento => setReminderDate(evento.target.value)}
               required
+              disabled={enviando}
             />
           </InputContainer>
-          <Button 
-            texto= 'Criar'
-            type='submit'
 
+          <Button 
+            texto={enviando ? 'Criando...' : 'Criar'}
+            type='submit'
           />
+
+          {mensagem && (
+            mensagem.tipo === 'sucesso' 
+              ? <MensagemSucesso>{mensagem.texto}</MensagemSucesso>
+              : <MensagemErro>{mensagem.texto}</MensagemErro>
+          )}
         </NovoLembrete>
-      )
+    )
 }
+
 export default Form
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
