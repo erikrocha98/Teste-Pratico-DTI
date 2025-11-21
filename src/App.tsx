@@ -1,8 +1,9 @@
 import Form from './Components/Form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Lembrete } from './types/lembretes';
 import styled from 'styled-components';
 import Lista from './Components/List';
+import lembretesService from './services/lembreteService';
 
 const AppStyled= styled.div`
     display: flex;
@@ -26,12 +27,62 @@ const Titulo = styled.h1`
 `
 
 function App() {
-  const [lembrete, setLembretes] =useState<Lembrete[]| []>([])
+  const [lembretes, setLembretes] =useState<Lembrete[]>([]);
+  const[carregando, setCarregando] = useState(true);
+  const[erro, setErro] = useState<string>('');
+
+  //Função para buscar todos os lembretes presentes no banco de dados
+  const carregarLembretes = async () => {
+    try{
+      setCarregando(true);
+      setErro('');
+      const dados = await lembretesService.listarLembretes();
+      setLembretes(dados);
+    }catch(error: any){
+      console.error('Erro ao carregar lembretes:', error);
+      setErro('Erro ao carregar lembretes. Verifique se a API está rodando.');
+    }finally {
+      setCarregando(false);
+    }
+  };
+
+  //Quando o componente montar busca os lembretes
+  useEffect(()=>{
+    carregarLembretes();
+  },[]);
+
+  //Função para adicionar novo lembrete
+  const handleNovoLembrete  = async(novoLembrete: Lembrete) =>{
+    setLembretes([...lembretes, novoLembrete]);
+  };
+
+  //Função para deletar novo lembrete
+  const handleDeletarLembrete = async (id: number) =>{
+    try {
+      await lembretesService.deletarLembrete(id);
+      setLembretes(lembretes.filter(lembrete => lembrete.id != id));
+    } catch (error) {
+      console.error('Erro ao deletar lembrete:', error);
+      setErro('Erro ao deletar lembrete.');
+    }
+  };
   return (
     <AppStyled>
       <Titulo>Novo Lembrete</Titulo>
-      <Form setLembretes= {setLembretes}/>
-      <Lista lembretes={lembrete}/>
+      <Form 
+        setLembretes= {setLembretes}
+        onNovoLembrete={handleNovoLembrete}
+      />
+
+      {erro && <MensagemErro>{erro}</MensagemErro>}
+      carregando ? (
+        <MensagemCarregando>Carregando lembretes...</MensagemCarregando>
+      ) : (
+        <Lista 
+          lembretes={lembretes} 
+          onDeletar={handleDeletarLembrete}
+        />
+      )}
     </AppStyled>
   );
 }

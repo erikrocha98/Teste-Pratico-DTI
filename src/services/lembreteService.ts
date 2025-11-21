@@ -1,19 +1,10 @@
 import api from "./api";
+import { Lembrete, CriarLembreteDTO } from '../types/lembretes';
 
-export interface Lembrete {
-  id?: number;
-  name: string;
-  reminderDate: string;
-}
-
-export interface CriarLembreteDTO {
-  name: string;
-  reminderDate: string;
-}
 
 const lembretesService = {
   // GET - Listar todos os lembretes
-  listar: async (): Promise<Lembrete[]> => {
+  listarLembretes: async (): Promise<Lembrete[]> => {
     const response = await api.get<Lembrete[]>("/Lembretes");
     return response.data;
   },
