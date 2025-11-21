@@ -88,7 +88,7 @@ function App() {
       />
 
       {erro && <MensagemErro>{erro}</MensagemErro>}
-      carregando ? (
+      {carregando ? (
         <MensagemCarregando>Carregando lembretes...</MensagemCarregando>
       ) : (
         <Lista 
